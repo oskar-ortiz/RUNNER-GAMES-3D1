@@ -12,9 +12,6 @@ public class canvasManager : MonoBehaviour
     public CanvasGroup BlackBlueCanvasGroup;
     public CanvasGroup LevelText1;
     public CanvasGroup LevelText2;
-    public CanvasGroup LevelText3;
-    public CanvasGroup LevelText4;
-    public CanvasGroup LevelText5;
     public Canvas Pause;
     public Canvas Credits;
     public Canvas Menu;
@@ -36,7 +33,7 @@ public class canvasManager : MonoBehaviour
         CreditsCamera.enabled = false;
         enPausa = false;
         enCredits = false;
-        LevelText1.alpha = 0f; LevelText2.alpha = 0f; LevelText3.alpha = 0f; LevelText4.alpha = 0f; LevelText5.alpha = 0f; BlackBlueCanvasGroup.alpha = 0f; BlackRedCanvasGroup.alpha = 0f; Pause.enabled = false; Credits.enabled = false; Instructions.enabled = false;
+        LevelText1.alpha = 0f; LevelText2.alpha = 0f; BlackBlueCanvasGroup.alpha = 0f; BlackRedCanvasGroup.alpha = 0f; Pause.enabled = false; Credits.enabled = false; Instructions.enabled = false;
         Menu.enabled = true;
         Time.timeScale = 1;
         volumeManager.clearBlur();
@@ -140,7 +137,7 @@ public class canvasManager : MonoBehaviour
 
     public void activaCanviaLevelText(int level)
     {
-        LevelText1.alpha = 0f; LevelText2.alpha = 0f; LevelText3.alpha = 0f; LevelText4.alpha = 0f; LevelText5.alpha = 0f;
+        LevelText1.alpha = 0f; LevelText2.alpha = 0f;
 
         if (!enMenu && !enPausa && !enCredits)
         {
@@ -151,18 +148,6 @@ public class canvasManager : MonoBehaviour
             else if (level == 2)
             {
                 LevelText2.alpha = 1f;
-            }
-            else if (level == 3)
-            {
-                LevelText3.alpha = 1f;
-            }
-            else if (level == 4)
-            {
-                LevelText4.alpha = 1f;
-            }
-            else if (level == 5)
-            {
-                LevelText5.alpha = 1f;
             }
 
         }

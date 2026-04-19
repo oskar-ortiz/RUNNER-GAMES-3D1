@@ -227,7 +227,6 @@ public class ObstacleManager : MonoBehaviour
     private readonly Dictionary<int, List<Collider>> levelHazardColliders = new Dictionary<int, List<Collider>>();
     private readonly HashSet<Collider> allHazardColliders = new HashSet<Collider>();
     private int activeLevel;
-    private float level3PendulumTime;
 
 
 
@@ -288,31 +287,6 @@ public class ObstacleManager : MonoBehaviour
         ranged3 = 10f;
         StartCoroutine(Moud3());
 
-
-        //Nivell 5
-        StartCoroutine(MouPorta2());
-        RotateHazard(porta31, new Vector3(0f, -90f, 0f), Space.Self);
-        StartCoroutine(MouPorta4());
-        StartCoroutine(MouRoda2());
-        posicioInicialZd8 = d8.localPosition.z;
-        fentEsquerrad8 = true;
-        ranged8 = 10f;
-        StartCoroutine(Moud8());
-
-        //Nivell 4
-        StartCoroutine(MouMartell1());
-        StartCoroutine(MouMartell2());
-        StartCoroutine(MouMartell3());
-        StartCoroutine(MouMartell4());
-        StartCoroutine(MouMartell5());
-        StartCoroutine(MouMartell6());
-        StartCoroutine(MouMartell7());
-        StartCoroutine(MouMartell8());
-        StartCoroutine(MouBoxa4());
-        StartCoroutine(MouBoxa2());
-        StartCoroutine(MouBoxa3());
-        StartCoroutine(MouBoxa1());
-
     }
 
     void Update()
@@ -351,45 +325,6 @@ public class ObstacleManager : MonoBehaviour
             RotateHazard(Torus1Nivell1, new Vector3(0f, 0f, -speedTorus1Nivell1 * Time.fixedDeltaTime), Space.Self);
             RotateHazard(Torus2Nivell1, new Vector3(0f, 0f, speedTorus2Nivell1 * Time.fixedDeltaTime), Space.Self);
         }
-
-        if (IsLevelActive(3))
-        {
-            level3PendulumTime += Time.fixedDeltaTime;
-
-            float angle = MaxAngleDeflectionPendulum1 * Mathf.Sin(level3PendulumTime * SpeedPendulum1);
-            SetHazardLocalRotation(pendulum1, Quaternion.Euler(0f, 0f, angle));
-            angle = MaxAngleDeflectionPendulum2 * Mathf.Sin(level3PendulumTime * SpeedPendulum2);
-            SetHazardLocalRotation(pendulum2, Quaternion.Euler(0f, 0f, angle));
-            angle = -MaxAngleDeflectionPendulum3 * Mathf.Sin(level3PendulumTime * SpeedPendulum3);
-            SetHazardLocalRotation(pendulum3, Quaternion.Euler(0f, 0f, angle));
-            angle = MaxAngleDeflectionPendulum4 * Mathf.Sin(level3PendulumTime * SpeedPendulum4);
-            SetHazardLocalRotation(pendulum4, Quaternion.Euler(0f, 0f, angle));
-            angle = -MaxAngleDeflectionPendulum5 * Mathf.Sin(level3PendulumTime * SpeedPendulum5);
-            SetHazardLocalRotation(pendulum5, Quaternion.Euler(0f, 0f, angle));
-            angle = MaxAngleDeflectionPendulum6 * Mathf.Sin(level3PendulumTime * SpeedPendulum6);
-            SetHazardLocalRotation(pendulum6, Quaternion.Euler(0f, 0f, angle));
-            angle = -MaxAngleDeflectionPendulum7 * Mathf.Sin(level3PendulumTime * SpeedPendulum7);
-            SetHazardLocalRotation(pendulum7, Quaternion.Euler(0f, 0f, angle));
-            RotateHazard(aspa1, new Vector3(-speedaspa1 * Time.fixedDeltaTime, 0f, 0f), Space.Self);
-            RotateHazard(aspa2, new Vector3(speedaspa2 * Time.fixedDeltaTime, 0f, 0f), Space.Self);
-        }
-
-        if (IsLevelActive(4))
-        {
-            RotateHazard(Torus3, new Vector3(0f, 0f, -speedTorus3 * Time.fixedDeltaTime), Space.Self);
-            RotateHazard(aspa3, new Vector3(-speedaspa3 * Time.fixedDeltaTime, 0f, 0f), Space.Self);
-            RotateHazard(aspa4, new Vector3(-speedaspa4 * Time.fixedDeltaTime, 0f, 0f), Space.Self);
-        }
-
-        if (IsLevelActive(5))
-        {
-            RotateHazard(porta11, new Vector3(0f, -speedPorta1 * Time.fixedDeltaTime, 0f), Space.Self);
-            RotateHazard(porta12, new Vector3(0f, speedPorta1 * Time.fixedDeltaTime, 0f), Space.Self);
-            RotateHazard(porta31, new Vector3(0f, -speedPorta3 * Time.fixedDeltaTime, 0f), Space.Self);
-            RotateHazard(porta32, new Vector3(0f, speedPorta3 * Time.fixedDeltaTime, 0f), Space.Self);
-            RotateHazard(Roda1, new Vector3(0f, 0f, -speedRoda1 * Time.fixedDeltaTime), Space.Self);
-            RotateHazard(Girador3, new Vector3(0f, speedGirador3 * Time.fixedDeltaTime, 0f), Space.Self);
-        }
     }
 
     private void ConfigureAnimatedHazards()
@@ -411,9 +346,6 @@ public class ObstacleManager : MonoBehaviour
 
         RegisterHazardGroup(1, Torus1Nivell1, Torus2Nivell1, d1, d2, d3);
         RegisterHazardGroup(2, punxes1, punxes2, punxes3, punxes4, punxes6, punxes7, punxes8, punxes9, punxes10, punxes11, Girador1, Girador2);
-        RegisterHazardGroup(3, pendulum1, pendulum2, pendulum3, pendulum4, pendulum5, pendulum6, pendulum7, aspa1, aspa2);
-        RegisterHazardGroup(4, martell1, martell2, martell3, martell4, martell5, martell6, martell7, martell8, Torus3, aspa3, aspa4, Boxa1, Boxa2, Boxa3, Boxa4);
-        RegisterHazardGroup(5, porta11, porta12, porta21, porta22, porta31, porta32, porta41, porta42, Roda1, Roda2, d8, Girador3);
     }
 
     private void RegisterHazardGroup(int level, params Transform[] hazardRoots)
